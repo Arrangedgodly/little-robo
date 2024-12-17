@@ -1,9 +1,16 @@
-[gd_scene load_steps=3 format=3 uid="uid://bwo10i5i1uc66"]
+[gd_scene load_steps=5 format=3 uid="uid://bwo10i5i1uc66"]
 
+[ext_resource type="PackedScene" uid="uid://bfmig8qtihtos" path="res://scenes/game.tscn" id="1_0rrfd"]
 [ext_resource type="PackedScene" uid="uid://dwhstk8133dj" path="res://scenes/map_level_one.tscn" id="1_qqbaf"]
 [ext_resource type="PackedScene" uid="uid://b8kqrluih2jvd" path="res://scenes/player.tscn" id="2_mjp0p"]
+[ext_resource type="PackedScene" uid="uid://ben7qm0mkvmls" path="res://scenes/spawn_manager.tscn" id="3_0djf4"]
 
 [node name="LevelOne" type="Node2D"]
+
+[node name="Game" parent="." node_paths=PackedStringArray("spawn_manager") instance=ExtResource("1_0rrfd")]
+spawn_manager = NodePath("../SpawnManager")
+
+[node name="SpawnManager" parent="." instance=ExtResource("3_0djf4")]
 
 [node name="MapLevelOne" parent="." instance=ExtResource("1_qqbaf")]
 

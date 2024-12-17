@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://bg70y4ki7ofhy"]
+
+[ext_resource type="Texture2D" uid="uid://dqnggncajfax8" path="res://assets/Enemies/Enemy 4/enemy4.png" id="1_26y34"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c34hc"]
+atlas = ExtResource("1_26y34")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5jy04"]
+atlas = ExtResource("1_26y34")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_lavv8"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c34hc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5jy04")
+}],
+"loop": true,
+"name": &"pinch",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_01mvh"]
+size = Vector2(15, 13.5)
+
+[node name="Claw" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_lavv8")
+animation = &"pinch"
+autoplay = "pinch"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -0.25)
+shape = SubResource("RectangleShape2D_01mvh")

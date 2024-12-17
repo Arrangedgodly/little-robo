@@ -1,0 +1,89 @@
+[gd_scene load_steps=13 format=3 uid="uid://cr522k4n44j5r"]
+
+[ext_resource type="Texture2D" uid="uid://oa6d8mp6ljt8" path="res://assets/Enemies/Enemy 3/enemy3_breaking_&_ressurecting.png" id="1_xhhc5"]
+[ext_resource type="Texture2D" uid="uid://bioo2q8csk1mf" path="res://assets/Enemies/Enemy 3/enemy3_walking.png" id="2_m6rvp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bgbbq"]
+atlas = ExtResource("1_xhhc5")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qwvpm"]
+atlas = ExtResource("1_xhhc5")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ax2sf"]
+atlas = ExtResource("1_xhhc5")
+region = Rect2(64, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0pusd"]
+atlas = ExtResource("1_xhhc5")
+region = Rect2(96, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8oibv"]
+atlas = ExtResource("1_xhhc5")
+region = Rect2(128, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cjhhy"]
+atlas = ExtResource("2_m6rvp")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nxi84"]
+atlas = ExtResource("2_m6rvp")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_75r6l"]
+atlas = ExtResource("2_m6rvp")
+region = Rect2(64, 0, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_63wgt"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bgbbq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qwvpm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ax2sf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0pusd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8oibv")
+}],
+"loop": false,
+"name": &"stomp",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cjhhy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nxi84")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_75r6l")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t1nnr"]
+size = Vector2(15, 13.5)
+
+[node name="TurtleBones" type="CharacterBody2D"]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_63wgt")
+animation = &"stomp"
+autoplay = "walk"
+frame = 4
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -0.25)
+shape = SubResource("RectangleShape2D_t1nnr")
