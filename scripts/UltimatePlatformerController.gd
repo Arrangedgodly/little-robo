@@ -251,13 +251,6 @@ func _updateData():
 
 func _process(_delta):
 	#INFO animations
-	#directions
-	if is_on_wall() and !is_on_floor() and latch and wallLatching and ((wallLatchingModifer and latchHold) or !wallLatchingModifer):
-		latched = true
-	else:
-		latched = false
-		wasLatched = true
-		_setLatch(0.2, false)
 
 	if rightHold and !latched:
 		anim.scale.x = animScaleLock.x
@@ -292,11 +285,8 @@ func _process(_delta):
 		anim.speed_scale = 1
 		anim.play("falling")
 		
-	if latch and slide:
+	if slide:
 		#wall slide and latch
-		if latched and !wasLatched:
-			anim.speed_scale = 1
-			anim.play("latch")
 		if is_on_wall() and velocity.y > 0 and slide and anim.animation != "slide" and wallSliding != 1:
 			anim.speed_scale = 1
 			anim.play("slide")
@@ -305,22 +295,6 @@ func _process(_delta):
 		if dashing:
 			anim.speed_scale = 1
 			anim.play("dash")
-			
-		#crouch
-		if crouching and !rolling:
-			if abs(velocity.x) > 10:
-				anim.speed_scale = 1
-				anim.play("crouch_walk")
-			else:
-				anim.speed_scale = 1
-				anim.play("crouch_idle")
-		
-		if rollTap and canRoll and roll:
-			anim.speed_scale = 1
-			anim.play("roll")
-		
-		
-		
 
 func _physics_process(delta):
 	if !dset:
@@ -337,12 +311,8 @@ func _physics_process(delta):
 	rightRelease = Input.is_action_just_released("right")
 	jumpTap = Input.is_action_just_pressed("jump")
 	jumpRelease = Input.is_action_just_released("jump")
-	runHold = Input.is_action_pressed("run")
-	latchHold = Input.is_action_pressed("latch")
 	dashTap = Input.is_action_just_pressed("dash")
-	rollTap = Input.is_action_just_pressed("roll")
 	downTap = Input.is_action_just_pressed("down")
-	twirlTap = Input.is_action_just_pressed("twirl")
 	
 	
 	#INFO Left and Right Movement
@@ -394,44 +364,6 @@ func _physics_process(delta):
 		else:
 			velocity.x = 0
 			
-	#INFO Crouching
-	if crouch:
-		if downHold and is_on_floor():
-			crouching = true
-		elif !downHold and ((runHold and runningModifier) or !runningModifier) and !rolling:
-			crouching = false
-			
-	if !is_on_floor():
-		crouching = false
-			
-	if crouching:
-		maxSpeed = maxSpeedLock / 2
-		col.scale.y = colliderScaleLockY / 2
-		col.position.y = colliderPosLockY + (8 * colliderScaleLockY)
-	else:
-		maxSpeed = maxSpeedLock
-		col.scale.y = colliderScaleLockY
-		col.position.y = colliderPosLockY
-		
-	#INFO Rolling
-	if canRoll and is_on_floor() and rollTap and crouching:
-		_rollingTime(0.75)
-		if wasPressingR and !(upHold):
-			velocity.y = 0
-			velocity.x = maxSpeedLock * rollLength
-			dashCount += -1
-			movementInputMonitoring = Vector2(false, false)
-			_inputPauseReset(rollLength * 0.0625)
-		elif !(upHold):
-			velocity.y = 0
-			velocity.x = -maxSpeedLock * rollLength
-			dashCount += -1
-			movementInputMonitoring = Vector2(false, false)
-			_inputPauseReset(rollLength * 0.0625)
-		
-	if canRoll and rolling:
-		#if you want your player to become immune or do something else while rolling, add that here.
-		pass
 			
 	#INFO Jump and Gravity
 	if velocity.y > 0:
@@ -481,11 +413,6 @@ func _physics_process(delta):
 				_bufferJump()
 			elif jumpBuffering == 0 and coyoteTime == 0 and is_on_floor():
 				_jump()	
-		elif jumpTap and is_on_wall() and !is_on_floor():
-			if wallJump and !latched:
-				_wallJump()
-			elif wallJump and latched:
-				_wallJump()
 		elif jumpTap and is_on_floor():
 			_jump()
 		
@@ -504,8 +431,6 @@ func _physics_process(delta):
 			velocity.y = -jumpMagnitude
 			jumpCount = jumpCount - 1
 			_endGroundPound()
-		elif jumpTap and is_on_wall() and wallJump:
-			_wallJump()
 			
 			
 	#INFO dashing
@@ -602,25 +527,6 @@ func _jump():
 		velocity.y = -jumpMagnitude
 		jumpCount += -1
 		jumpWasPressed = false
-		
-func _wallJump():
-	var horizontalWallKick = abs(jumpMagnitude * cos(wallKickAngle * (PI / 180)))
-	var verticalWallKick = abs(jumpMagnitude * sin(wallKickAngle * (PI / 180)))
-	velocity.y = -verticalWallKick
-	var dir = 1
-	if wallLatchingModifer and latchHold:
-		dir = -1
-	if wasMovingR:
-		velocity.x = -horizontalWallKick  * dir
-	else:
-		velocity.x = horizontalWallKick * dir
-	if inputPauseAfterWallJump != 0:
-		movementInputMonitoring = Vector2(false, false)
-		_inputPauseReset(inputPauseAfterWallJump)
-			
-func _setLatch(delay, setBool):
-	await get_tree().create_timer(delay).timeout
-	wasLatched = setBool
 			
 func _inputPauseReset(time):
 	await get_tree().create_timer(time).timeout
@@ -646,11 +552,6 @@ func _dashingTime(time):
 	dashing = true
 	await get_tree().create_timer(time).timeout
 	dashing = false
-
-func _rollingTime(time):
-	rolling = true
-	await get_tree().create_timer(time).timeout
-	rolling = false	
 
 func _groundPound():
 	appliedTerminalVelocity = terminalVelocity * 10

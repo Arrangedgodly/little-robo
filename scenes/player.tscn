@@ -238,6 +238,7 @@ jumpHeight = 2.2
 jumps = 2
 wallSliding = 8.0
 dashType = 4
+dashLength = 1.8
 groundPound = true
 groundPoundPause = 0.125
 run = true
@@ -250,7 +251,6 @@ falling = true
 sprite_frames = SubResource("SpriteFrames_abim7")
 animation = &"slide"
 autoplay = "idle"
-frame_progress = 0.683636
 script = ExtResource("13_jo40e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
