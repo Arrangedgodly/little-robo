@@ -1,4 +1,4 @@
-extends StaticBody2D
+extends Area2D
 @onready var collision: CollisionShape2D = $CollisionShape2D
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 signal triggered(new_pos: Vector2)

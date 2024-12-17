@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://b8kqrluih2jvd"]
+[gd_scene load_steps=39 format=3 uid="uid://b8kqrluih2jvd"]
 
 [ext_resource type="Texture2D" uid="uid://dcxfiyu21j7f7" path="res://assets/Player/climbing.png" id="1_siw08"]
 [ext_resource type="Script" path="res://scripts/UltimatePlatformerController.gd" id="1_ujlxw"]
@@ -13,6 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://d4gpeun3mqm6" path="res://assets/Player/walking.png" id="10_5as2t"]
 [ext_resource type="Texture2D" uid="uid://fubcf4lync7q" path="res://assets/Player/wall_slide.png" id="11_ikks2"]
 [ext_resource type="Script" path="res://scripts/sprite.gd" id="13_jo40e"]
+[ext_resource type="FontFile" uid="uid://cpm1hh47slm0n" path="res://assets/fonts/Coder's Crux 2.ttf" id="14_x66ss"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jf7hl"]
 atlas = ExtResource("1_siw08")
@@ -20,6 +21,14 @@ region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b445q"]
 atlas = ExtResource("1_siw08")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tjwan"]
+atlas = ExtResource("8_c48ay")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bxqv7"]
+atlas = ExtResource("8_c48ay")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gjy6y"]
@@ -90,14 +99,6 @@ region = Rect2(64, 0, 32, 16)
 atlas = ExtResource("7_vbu37")
 region = Rect2(96, 0, 32, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tjwan"]
-atlas = ExtResource("8_c48ay")
-region = Rect2(0, 0, 16, 16)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_bxqv7"]
-atlas = ExtResource("8_c48ay")
-region = Rect2(16, 0, 16, 16)
-
 [sub_resource type="AtlasTexture" id="AtlasTexture_2ahwl"]
 atlas = ExtResource("9_qc5db")
 region = Rect2(0, 0, 16, 16)
@@ -113,6 +114,17 @@ animations = [{
 }],
 "loop": true,
 "name": &"climb",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tjwan")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bxqv7")
+}],
+"loop": true,
+"name": &"dash",
 "speed": 5.0
 }, {
 "frames": [{
@@ -208,17 +220,6 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tjwan")
-}, {
-"duration": 1.0,
-"texture": SubResource("AtlasTexture_bxqv7")
-}],
-"loop": true,
-"name": &"swim",
-"speed": 5.0
-}, {
-"frames": [{
-"duration": 1.0,
 "texture": SubResource("AtlasTexture_2ahwl")
 }],
 "loop": true,
@@ -236,6 +237,7 @@ PlayerCollider = NodePath("CollisionShape2D")
 maxSpeed = 260.0
 jumpHeight = 2.2
 jumps = 2
+wallJump = true
 wallSliding = 8.0
 dashType = 4
 dashLength = 1.8
@@ -249,7 +251,7 @@ falling = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_abim7")
-animation = &"slide"
+animation = &"dash"
 autoplay = "idle"
 script = ExtResource("13_jo40e")
 
@@ -258,11 +260,12 @@ position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_korw8")
 
 [node name="Label" type="Label" parent="."]
-offset_left = -22.0
+offset_left = -21.0
 offset_top = -26.0
-offset_right = 20.0
+offset_right = 21.0
 offset_bottom = -3.0
-theme_override_font_sizes/font_size = 8
+theme_override_fonts/font = ExtResource("14_x66ss")
+theme_override_font_sizes/font_size = 16
 text = "None"
 horizontal_alignment = 1
 vertical_alignment = 1
