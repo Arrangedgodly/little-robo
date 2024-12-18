@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b77p4jg1xcv1u"
-path="res://.godot/imported/enemy1_stomped.png-0448ef6157306e4d3c13fb4c1f472866.ctex"
+uid="uid://bioo2q8csk1mf"
+path="res://.godot/imported/enemy3_walking.png-761d79a18532620126bb4b805ce92df2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Enemies/Enemy 1/enemy1_stomped.png"
-dest_files=["res://.godot/imported/enemy1_stomped.png-0448ef6157306e4d3c13fb4c1f472866.ctex"]
+source_file="res://scenes/enemies/turtle_bones/enemy3_walking.png"
+dest_files=["res://.godot/imported/enemy3_walking.png-761d79a18532620126bb4b805ce92df2.ctex"]
 
 [params]
 

@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://c1u164irijpwy"]
 
-[ext_resource type="Texture2D" uid="uid://cmdjdji4bl7av" path="res://assets/Enemies/Enemy 2/blue_shell.png" id="1_2wg4f"]
-[ext_resource type="Texture2D" uid="uid://d1vlgnfegiljk" path="res://assets/Enemies/Enemy 2/enemy2_blu_walking.png" id="2_p7hxg"]
+[ext_resource type="Texture2D" uid="uid://cmdjdji4bl7av" path="res://scenes/enemies/turtle/blue_shell.png" id="1_2wg4f"]
+[ext_resource type="Texture2D" uid="uid://d1vlgnfegiljk" path="res://scenes/enemies/turtle/enemy2_blu_walking.png" id="2_p7hxg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_abdt7"]
 atlas = ExtResource("1_2wg4f")

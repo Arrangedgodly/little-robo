@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://cmuffyc628anr"]
+[gd_scene load_steps=10 format=3 uid="uid://cmuffyc628anr"]
 
-[ext_resource type="Texture2D" uid="uid://b77p4jg1xcv1u" path="res://assets/Enemies/Enemy 1/enemy1_stomped.png" id="1_gsdnc"]
-[ext_resource type="Texture2D" uid="uid://dlyq42xttcovv" path="res://assets/Enemies/Enemy 1/enemy1_walking.png" id="2_4j4ws"]
+[ext_resource type="Texture2D" uid="uid://b77p4jg1xcv1u" path="res://scenes/enemies/bug/enemy1_stomped.png" id="1_gsdnc"]
+[ext_resource type="Script" path="res://scripts/enemies/enemy.gd" id="1_xpq3p"]
+[ext_resource type="Texture2D" uid="uid://dlyq42xttcovv" path="res://scenes/enemies/bug/enemy1_walking.png" id="2_4j4ws"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_67nhr"]
 atlas = ExtResource("1_gsdnc")
@@ -48,6 +49,7 @@ animations = [{
 size = Vector2(15, 13)
 
 [node name="Bug" type="CharacterBody2D"]
+script = ExtResource("1_xpq3p")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_rnoao")
@@ -58,3 +60,11 @@ frame_progress = 0.785865
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 2.5)
 shape = SubResource("RectangleShape2D_5x0wt")
+
+[node name="FloorChecker" type="RayCast2D" parent="."]
+position = Vector2(-7, 0)
+target_position = Vector2(0, 16)
+
+[node name="WallChecker" type="RayCast2D" parent="."]
+position = Vector2(0, -3)
+target_position = Vector2(-17, 0)

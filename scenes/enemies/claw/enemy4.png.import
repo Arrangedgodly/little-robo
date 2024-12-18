@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://oa6d8mp6ljt8"
-path="res://.godot/imported/enemy3_breaking_&_ressurecting.png-225f63ed9a329ea34e710542402de66d.ctex"
+uid="uid://dqnggncajfax8"
+path="res://.godot/imported/enemy4.png-3951423ca696c0b55ac7964382818ee6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Enemies/Enemy 3/enemy3_breaking_&_ressurecting.png"
-dest_files=["res://.godot/imported/enemy3_breaking_&_ressurecting.png-225f63ed9a329ea34e710542402de66d.ctex"]
+source_file="res://scenes/enemies/claw/enemy4.png"
+dest_files=["res://.godot/imported/enemy4.png-3951423ca696c0b55ac7964382818ee6.ctex"]
 
 [params]
 
