@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://cmuffyc628anr"]
+[gd_scene load_steps=12 format=3 uid="uid://cmuffyc628anr"]
 
 [ext_resource type="Texture2D" uid="uid://b77p4jg1xcv1u" path="res://scenes/enemies/bug/enemy1_stomped.png" id="1_gsdnc"]
 [ext_resource type="Script" path="res://scripts/enemies/enemy.gd" id="1_xpq3p"]
 [ext_resource type="Texture2D" uid="uid://dlyq42xttcovv" path="res://scenes/enemies/bug/enemy1_walking.png" id="2_4j4ws"]
+[ext_resource type="FontFile" uid="uid://c6lknuqnaw64n" path="res://assets/fonts/A Goblin Appears!.otf" id="4_lw7u0"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_67nhr"]
 atlas = ExtResource("1_gsdnc")
@@ -48,7 +49,11 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5x0wt"]
 size = Vector2(15, 13)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ntoo"]
+size = Vector2(15, 12)
+
 [node name="Bug" type="CharacterBody2D"]
+collision_layer = 2
 script = ExtResource("1_xpq3p")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -68,3 +73,20 @@ target_position = Vector2(0, 16)
 [node name="WallChecker" type="RayCast2D" parent="."]
 position = Vector2(0, -3)
 target_position = Vector2(-17, 0)
+
+[node name="StompChecker" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StompChecker"]
+position = Vector2(0.5, -10)
+shape = SubResource("RectangleShape2D_7ntoo")
+debug_color = Color(1.01075e-06, 0.646419, 0.237497, 0.42)
+
+[node name="Label" type="Label" parent="."]
+offset_left = -4.0
+offset_top = -39.0
+offset_right = 7.0
+offset_bottom = -22.0
+theme_override_fonts/font = ExtResource("4_lw7u0")
+theme_override_font_sizes/font_size = 16
+text = "!"
+horizontal_alignment = 1

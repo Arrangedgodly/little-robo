@@ -2,12 +2,10 @@ extends CharacterBody2D
 
 class_name PlatformerController2D
 
-@export var README: String = "IMPORTANT: MAKE SURE TO ASSIGN 'left' 'right' 'jump' 'dash' 'up' 'down' in the project settings input map. Usage tips. 1. Hover over each toggle and variable to read what it does and to make sure nothing bugs. 2. Animations are very primitive. To make full use of your custom art, you may want to slightly change the code for the animations"
-#INFO READEME 
-#IMPORTANT: MAKE SURE TO ASSIGN 'left' 'right' 'jump' 'dash' 'up' 'down' in the project settings input map. THIS IS REQUIRED
-#Usage tips. 
-#1. Hover over each toggle and variable to read what it does and to make sure nothing bugs. 
-#2. Animations are very primitive. To make full use of your custom art, you may want to slightly change the code for the animations
+signal took_damage
+signal gain_health
+
+var can_damage: bool = true
 
 @export_category("Necesary Child Nodes")
 @export var PlayerSprite: AnimatedSprite2D
@@ -564,3 +562,13 @@ func _endGroundPound():
 
 func _placeHolder():
 	print("")
+
+func take_damage() -> void:
+	if can_damage:
+		took_damage.emit()
+		can_damage = false
+		await get_tree().create_timer(1).timeout
+		can_damage = true
+
+func increase_health() -> void:
+	gain_health.emit()

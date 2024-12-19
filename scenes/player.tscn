@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://b8kqrluih2jvd"]
+[gd_scene load_steps=37 format=3 uid="uid://b8kqrluih2jvd"]
 
 [ext_resource type="Texture2D" uid="uid://dcxfiyu21j7f7" path="res://assets/Player/climbing.png" id="1_siw08"]
 [ext_resource type="Script" path="res://scripts/UltimatePlatformerController.gd" id="1_ujlxw"]
@@ -12,8 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://bpsubgdw1c5v" path="res://assets/Player/enter_into_tube.png" id="9_qc5db"]
 [ext_resource type="Texture2D" uid="uid://d4gpeun3mqm6" path="res://assets/Player/walking.png" id="10_5as2t"]
 [ext_resource type="Texture2D" uid="uid://fubcf4lync7q" path="res://assets/Player/wall_slide.png" id="11_ikks2"]
-[ext_resource type="Script" path="res://scripts/sprite.gd" id="13_jo40e"]
-[ext_resource type="FontFile" uid="uid://cpm1hh47slm0n" path="res://assets/fonts/Coder's Crux 2.ttf" id="14_x66ss"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jf7hl"]
 atlas = ExtResource("1_siw08")
@@ -231,6 +229,7 @@ animations = [{
 size = Vector2(10, 13)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("PlayerSprite", "PlayerCollider") groups=["player"]]
+collision_mask = 3
 script = ExtResource("1_ujlxw")
 PlayerSprite = NodePath("AnimatedSprite2D")
 PlayerCollider = NodePath("CollisionShape2D")
@@ -253,21 +252,9 @@ falling = true
 sprite_frames = SubResource("SpriteFrames_abim7")
 animation = &"dash"
 autoplay = "idle"
-script = ExtResource("13_jo40e")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_korw8")
-
-[node name="Label" type="Label" parent="."]
-offset_left = -21.0
-offset_top = -26.0
-offset_right = 21.0
-offset_bottom = -3.0
-theme_override_fonts/font = ExtResource("14_x66ss")
-theme_override_font_sizes/font_size = 16
-text = "None"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [connection signal="animation_changed" from="AnimatedSprite2D" to="AnimatedSprite2D" method="_on_animation_changed"]
