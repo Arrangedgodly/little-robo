@@ -36,7 +36,9 @@ func _physics_process(delta):
 		var collider = collision.get_collider()
 		
 		if collider and collider.is_in_group("player"):
+			if collider.can_damage:
 				collider.take_damage()
+				break
 	
 	if can_die:
 		var sprite_size = sprite.sprite_frames.get_frame_texture("walk", 0).get_size()

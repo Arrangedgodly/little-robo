@@ -12,11 +12,12 @@ func _ready() -> void:
 	player.gain_health.connect(gain_health)
 
 func lose_health() -> void:
-	current_health -= 1
-	if current_health == 0:
-		dead.emit()
-	else:
+	if current_health > 0:
 		damage.emit()
+		current_health -= 1
+		print(current_health)
+		if current_health == 0:
+			dead.emit()
 	
 func gain_health() -> void:
 	if current_health < max_health:
