@@ -3,6 +3,8 @@ extends CharacterBody2D
 var speed: int = 60
 var move_direction = Vector2.LEFT
 var can_die: bool = false
+var attack_cooldown: float = 1.0
+var last_attack_time: float = 0.0
 
 @onready var sprite: AnimatedSprite2D = $AnimatedSprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
@@ -30,14 +32,17 @@ func _physics_process(delta):
 	# Move and slide using built-in function
 	move_and_slide()
 	
+	var current_time = Time.get_unix_time_from_system()
 	
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
 		var collider = collision.get_collider()
 		
 		if collider and collider.is_in_group("player"):
-			if collider.can_damage:
+			if current_time - last_attack_time >= attack_cooldown:
+				print(collider)
 				collider.take_damage()
+				last_attack_time = current_time
 				break
 	
 	if can_die:
@@ -50,6 +55,7 @@ func _physics_process(delta):
 	update_sprite_direction()
 
 func handle_stomp() -> void:
+	print_debug(self.name + " handling stomp")
 	speed = 0
 	sprite.play("stomp")
 	await get_tree().create_timer(.125).timeout
@@ -78,10 +84,12 @@ func update_sprite_direction():
 
 func _on_stomp_checker_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
+		print_debug(self.name + " stomp checker body entered")
 		can_die = true
 		label.show()
 
 func _on_stomp_checker_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
+		print_debug(self.name + " stomp checker body exited")
 		can_die = false
 		label.hide()

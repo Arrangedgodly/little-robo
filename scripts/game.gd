@@ -4,24 +4,20 @@ extends Node2D
 @export var level_manager: Node2D
 @export var health_manager: Node2D
 @export var player: CharacterBody2D
-@export var death_zone: Area2D
 
 func _ready() -> void:
-	player.position = spawn_manager.spawn_pos
-	
-	death_zone.kill.connect(_reset_game)
-	player.took_damage.connect(_on_player_took_damage)
-	player.gain_health.connect(_on_player_gain_health)
 	health_manager.dead.connect(_reset_game)
+	level_manager.death_zone_triggered.connect(_reset_game)
+	level_manager.level_loaded.connect(spawn_manager.init)
+	level_manager.clearing.connect(spawn_manager.disconnect_checkpoints)
 	
-	level_manager.load_level(1)
+	level_manager.load_level(level_manager.current_level)
+	player.position = spawn_manager.spawn_pos
 	
 func _reset_game() -> void:
-	player.position = spawn_manager.spawn_pos
+	print_debug("resetting game")
 	level_manager.clear_level()
-
-func _on_player_took_damage() -> void:
-	health_manager.lose_health()
-
-func _on_player_gain_health() -> void:
-	health_manager.gain_health()
+	get_tree().process_frame
+	player.position = spawn_manager.spawn_pos
+	level_manager.load_level(level_manager.current_level)
+	health_manager.reset_health()

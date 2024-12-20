@@ -14,8 +14,10 @@ func _ready() -> void:
 		heart_container.add_child(texture_rect)
 	health_manager.damage.connect(_handle_health)
 	health_manager.health_gain.connect(_handle_health)
+	health_manager.reset.connect(_handle_health)
 	
 func _handle_health() -> void:
+	print_debug("handling health loss/gain")
 	var i = health_manager.current_health
 	for heart in heart_container.get_children():
 		if i > 0:

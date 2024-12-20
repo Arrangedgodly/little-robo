@@ -1,22 +1,18 @@
-[gd_scene load_steps=9 format=3 uid="uid://bfmig8qtihtos"]
+[gd_scene load_steps=7 format=3 uid="uid://bfmig8qtihtos"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_8tbln"]
-[ext_resource type="PackedScene" path="res://scenes/game/level_manager.tscn" id="2_pl4px"]
+[ext_resource type="PackedScene" uid="uid://b0lba5r3c1uf0" path="res://scenes/game/level_manager.tscn" id="2_pl4px"]
 [ext_resource type="PackedScene" uid="uid://ben7qm0mkvmls" path="res://scenes/game/spawn_manager.tscn" id="2_urf17"]
-[ext_resource type="PackedScene" uid="uid://dt2ncltnn8832" path="res://scenes/game/death_zone.tscn" id="3_bwk02"]
 [ext_resource type="PackedScene" uid="uid://b8kqrluih2jvd" path="res://scenes/player.tscn" id="4_hhbq0"]
 [ext_resource type="PackedScene" uid="uid://cr5vdifo22qtg" path="res://scenes/game/health_manager.tscn" id="4_xsk0x"]
 [ext_resource type="PackedScene" uid="uid://bro5xt0qgablt" path="res://scenes/game/player_ui.tscn" id="7_jdee4"]
 
-[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_avc2b"]
-
-[node name="Game" type="Node2D" node_paths=PackedStringArray("spawn_manager", "level_manager", "health_manager", "player", "death_zone")]
+[node name="Game" type="Node2D" node_paths=PackedStringArray("spawn_manager", "level_manager", "health_manager", "player")]
 script = ExtResource("1_8tbln")
 spawn_manager = NodePath("SpawnManager")
 level_manager = NodePath("LevelManager")
 health_manager = NodePath("HealthManager")
 player = NodePath("Player")
-death_zone = NodePath("DeathZone")
 
 [node name="LevelManager" parent="." instance=ExtResource("2_pl4px")]
 
@@ -24,12 +20,6 @@ death_zone = NodePath("DeathZone")
 
 [node name="HealthManager" parent="." node_paths=PackedStringArray("player") instance=ExtResource("4_xsk0x")]
 player = NodePath("../Player")
-
-[node name="DeathZone" parent="." instance=ExtResource("3_bwk02")]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathZone"]
-position = Vector2(0, 150)
-shape = SubResource("WorldBoundaryShape2D_avc2b")
 
 [node name="Player" parent="." instance=ExtResource("4_hhbq0")]
 

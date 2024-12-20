@@ -182,6 +182,8 @@ func _ready():
 	anim = PlayerSprite
 	col = PlayerCollider
 	
+	took_damage.connect(_on_took_damage)
+	
 	_updateData()
 	
 func _updateData():
@@ -564,11 +566,16 @@ func _placeHolder():
 	print("")
 
 func take_damage() -> void:
+	print_debug("taking damage")
 	if can_damage:
-		took_damage.emit()
 		can_damage = false
-		await get_tree().create_timer(1).timeout
-		can_damage = true
+		took_damage.emit()
+
+func _on_took_damage() -> void:
+	print_debug("on player took damage")
+	await get_tree().create_timer(1).timeout
+	can_damage = true
 
 func increase_health() -> void:
+	print_debug("increasing health")
 	gain_health.emit()
