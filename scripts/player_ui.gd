@@ -17,7 +17,6 @@ func _ready() -> void:
 	health_manager.reset.connect(_handle_health)
 	
 func _handle_health() -> void:
-	print_debug("handling health loss/gain")
 	var i = health_manager.current_health
 	for heart in heart_container.get_children():
 		if i > 0:

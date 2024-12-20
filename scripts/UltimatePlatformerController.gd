@@ -566,16 +566,13 @@ func _placeHolder():
 	print("")
 
 func take_damage() -> void:
-	print_debug("taking damage")
 	if can_damage:
 		can_damage = false
 		took_damage.emit()
 
 func _on_took_damage() -> void:
-	print_debug("on player took damage")
 	await get_tree().create_timer(1).timeout
 	can_damage = true
 
 func increase_health() -> void:
-	print_debug("increasing health")
 	gain_health.emit()

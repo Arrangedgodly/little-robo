@@ -55,7 +55,6 @@ func _physics_process(delta):
 	update_sprite_direction()
 
 func handle_stomp() -> void:
-	print_debug(self.name + " handling stomp")
 	speed = 0
 	sprite.play("stomp")
 	await get_tree().create_timer(.125).timeout
@@ -84,12 +83,10 @@ func update_sprite_direction():
 
 func _on_stomp_checker_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		print_debug(self.name + " stomp checker body entered")
 		can_die = true
 		label.show()
 
 func _on_stomp_checker_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
-		print_debug(self.name + " stomp checker body exited")
 		can_die = false
 		label.hide()

@@ -22,16 +22,13 @@ func init() -> void:
 func set_spawn(new_pos: Vector2) -> void:
 	reset_spawn(spawn_pos)
 	spawn_pos = new_pos
-	print_debug("set spawn")
 
 func reset_spawn(pos: Vector2) -> void:
-	print_debug("reset spawn")
 	for checkpoint in checkpoints:
 		if is_instance_valid(checkpoint) and checkpoint.position == pos:
 			checkpoint.reset()
 
 func disconnect_checkpoints() -> void:
-	print_debug("disconnecting checkpoints")
 	for checkpoint in checkpoints:
 		if is_instance_valid(checkpoint):
 			checkpoint.set_connected(false)

@@ -15,7 +15,6 @@ func _ready() -> void:
 	player.position = spawn_manager.spawn_pos
 	
 func _reset_game() -> void:
-	print_debug("resetting game")
 	level_manager.clear_level()
 	get_tree().process_frame
 	player.position = spawn_manager.spawn_pos

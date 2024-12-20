@@ -14,7 +14,6 @@ func _ready() -> void:
 
 func _on_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player") and can_trigger and is_connected:
-		print_debug("checkpoint triggered")
 		can_trigger = false
 		sprite.play("trigger")
 		triggered.emit(position)
@@ -22,12 +21,10 @@ func _on_body_entered(body: Node2D) -> void:
 		sprite.play("on")
 
 func reset() -> void:
-	print_debug("checkpoint reset")
 	can_trigger = true
 	sprite.play("off")
 
 func set_active() -> void:
-	print_debug("setting checkpoint active")
 	can_trigger = false
 	sprite.play("on")
 

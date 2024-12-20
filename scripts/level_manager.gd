@@ -7,7 +7,6 @@ var current_level: int = 1
 var _is_transitioning: bool = false
 
 func load_level(level_num: int) -> void:
-	print_debug("Loading level")
 	var level_path: String = "res://scenes/levels/level_" + str(level_num) + ".tscn"
 	
 	if not ResourceLoader.exists(level_path):
@@ -35,11 +34,9 @@ func _deferred_load_level(level_scene: PackedScene, level_num: int) -> void:
 	level_loaded.emit()
 
 func increase_level() -> void:
-	print_debug("increasing level")
 	load_level(current_level + 1)
 
 func clear_level() -> void:
-	print_debug("clearing active level")
 	clearing.emit()
 	if get_children().size() > 0:
 		for child in get_children():
@@ -50,6 +47,5 @@ func _on_level_death_zone_triggered() -> void:
 	if _is_transitioning:
 		return
 	_is_transitioning = true
-	print_debug("current level death zone triggered")
 	death_zone_triggered.emit()
 	_is_transitioning = false
